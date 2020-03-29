@@ -7,4 +7,6 @@ const router = express.Router();
 //GET /admin/users
 router.get('/users', adminController.getUsers);
 
+router.post('/createUser', adminController.createUser);
+
 module.exports = router;
