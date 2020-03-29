@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const port = 8080;
 const host = 'localhost';
@@ -6,6 +7,8 @@ const host = 'localhost';
 const adminRoutes = require('./routes/admin');
 
 const app = express();
+
+app.use(bodyParser.json());
 
 app.use('/admin', adminRoutes);
 
