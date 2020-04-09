@@ -6,6 +6,9 @@ const host = 'localhost';
 
 const adminRoutes = require('./routes/admin');
 
+const sequelizeDB = require('./util/database');
+const User = require('./models/user');
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -22,7 +25,17 @@ app.use((req, res, next) => {
 
 app.use('/admin', adminRoutes);
 
+sequelizeDB
+    .sync()
+    .then(result => {
+        console.log(result)
+        app.listen(port, host, () => {
+            console.log(`Server is running on port: ${port}, and host: ${host}`);
+        });
+    })
+    .catch(err => {
+        console.log(err)
+    });
 
-app.listen(port, host, () => {
-    console.log(`Server is running on port: ${port}, and host: ${host}`);
-});
+
+
