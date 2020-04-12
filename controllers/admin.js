@@ -1,3 +1,6 @@
+const UserModel = require('../models/user');
+const UserClass = require('../classes/userClass');
+
 exports.getUsers = (req, res, next) => {
     console.log('getUsers');
     res.status(200).json({
@@ -9,7 +12,13 @@ exports.createUser = (req, res, next) => {
     console.log('createUser');
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
-    console.log(`first name: ${firstName}, last name : ${lastName}`);
+    //console.log(`first name: ${firstName}, last name : ${lastName}`);
+
+    const newUser = new UserClass(firstName, lastName);
+    newUser.generateLog();
+
+    UserModel.create(newUser).then(result => console.log(result)).catch(err => console.log(err));
+
     res.status(201).json({
         message: 'User has been created',
         user: {
