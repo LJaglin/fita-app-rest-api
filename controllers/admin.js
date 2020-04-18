@@ -17,6 +17,7 @@ exports.createUser = (req, res, next) => {
     const newUser = new UserClass(firstName, lastName);
     newUser.generateLog();
 
+    //UserModel.create(newUser).then(result => console.log(result)).catch(err => console.log(err));
     UserModel.create(newUser).then(result => console.log(result)).catch(err => console.log(err));
 
     res.status(201).json({
