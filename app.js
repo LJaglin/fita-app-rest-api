@@ -6,8 +6,8 @@ const host = 'localhost';
 
 const adminRoutes = require('./routes/admin');
 
-const sequelizeDB = require('./util/database');
-const User = require('./models/user');
+const sequelizeConnection = require('./util/database');
+const User = require('./models/userModel');
 
 const app = express();
 
@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 
 app.use('/admin', adminRoutes);
 
-sequelizeDB
+sequelizeConnection
     .sync()
     .then(result => {
         console.log(result)

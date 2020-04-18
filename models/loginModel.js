@@ -1,7 +1,8 @@
 const { Sequelize, Model } = require('sequelize');
 
-const UserModel = require('../models/user');
+const UserModel = require('./userModel');
 
+//connection instance
 const sequelize = require('../util/database');
 
 class loginModel extends Model {}
