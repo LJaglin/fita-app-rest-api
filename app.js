@@ -6,8 +6,10 @@ const host = 'localhost';
 
 const adminRoutes = require('./routes/admin');
 
-const sequelizeConnection = require('./util/database');
-const User = require('./models/userModel');
+const UserModel = require('./models/userModel');
+const LoginModel = require('./models/loginModel');
+ 
+const sequelizeConnection = require('./util/database'); //models are stored here
 
 const app = express();
 

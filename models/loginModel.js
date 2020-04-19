@@ -1,12 +1,11 @@
 const { Sequelize, Model } = require('sequelize');
 
-const UserModel = require('./userModel');
-
 //connection instance
 const sequelize = require('../util/database');
 
-class loginModel extends Model {}
-loginModel.init({
+class LoginModel extends Model {}
+
+LoginModel.init({
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -26,15 +25,17 @@ loginModel.init({
         type: Sequelize.STRING,
         allowNull: false
     }
-}, 
-{
+}, {
     sequelize, 
-    modelName: 'login'
+    modelName: 'login',
+    underscored: true,
+    freezeTableName: true
 });
 
-loginModel.belongsTo(UserModel);
+// LoginModel.belongsTo(UserModel);
 
-// UserModel.hasOne(loginModel);
+// UserModel.hasOne(LoginModel);
+
+module.exports = LoginModel;
 
 
-module.exports = loginModel;
