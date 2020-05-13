@@ -5,16 +5,22 @@ exports.getUsers = (req, res, next) => {
     console.log('getUsers');
 
     UserModel.findAll()
-                .then((data) =>{
-                    data.forEach(element => {
-                        element.id;
-                    });
-                })
-                .catch(err => console.log(err));
-
-    res.status(200).json({
-        users: [{ firstName: 'John', lastName: 'Doe' }, { firstName: 'James', lastName: 'Bond' }]
-    });
+        .then(users => {
+            console.log(users);
+            console.log(Object.keys(users).length);
+            if (!users || Object.keys(users).length === 0) {
+                const error = new Error('Could not find users.');
+                error.statusCode = 404;
+                throw error;
+            }
+            res.status(200).json({message: 'Fetched users successfully.', users: users});
+        })
+        .catch(err => {
+            if (!err.statusCode) {
+                err.statusCode = 500;
+            }
+            next(err);
+        });
 };
 
 exports.createUser = (req, res, next) => {
