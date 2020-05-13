@@ -3,6 +3,15 @@ const UserClass = require('../classes/userClass');
 
 exports.getUsers = (req, res, next) => {
     console.log('getUsers');
+
+    UserModel.findAll()
+                .then((data) =>{
+                    data.forEach(element => {
+                        element.id;
+                    });
+                })
+                .catch(err => console.log(err));
+
     res.status(200).json({
         users: [{ firstName: 'John', lastName: 'Doe' }, { firstName: 'James', lastName: 'Bond' }]
     });
