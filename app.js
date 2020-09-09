@@ -5,9 +5,11 @@ const port = 8080;
 const host = 'localhost';
 
 const adminRoutes = require('./routes/admin');
+const userRoutes = require('./routes/user');
 
 const UserModel = require('./models/userModel');
 const LoginModel = require('./models/loginModel');
+const User = require('./models/user');
  
 const sequelizeConnection = require('./util/database'); //models are stored here
 
@@ -26,6 +28,7 @@ app.use((req, res, next) => {
 
 
 app.use('/admin', adminRoutes);
+app.use('/user', userRoutes);
 
 sequelizeConnection
     .sync()
