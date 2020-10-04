@@ -1,13 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const port = 8080;
-const host = 'localhost';
+const dotenv = require('dotenv');
+dotenv.config();
+
+const port = process.env.SERVER_PORT;
+const host = process.env.SERVER_HOST;
 
 const adminRoutes = require('./routes/admin');
 const userRoutes = require('./routes/user');
 
-const UserModel = require('./models/userModel');
 const LoginModel = require('./models/loginModel');
 const User = require('./models/user');
  
