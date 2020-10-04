@@ -10,7 +10,6 @@ const host = process.env.SERVER_HOST;
 const adminRoutes = require('./routes/admin');
 const userRoutes = require('./routes/user');
 
-const LoginModel = require('./models/loginModel');
 const User = require('./models/user');
  
 const sequelizeConnection = require('./util/database'); //models are stored here

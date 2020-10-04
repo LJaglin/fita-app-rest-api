@@ -1,13 +1,18 @@
 const UserModel = require('../models/user');
 const User = require('../classes/user');
 
+const bcrypt = require('bcryptjs');
+
 exports.addUser = (req, res, next) => {
     console.log('controller: addUser');
     const email = req.body.email;
     const password = req.body.password;
     console.log(`Data from request email: ${email}, password : ${password}`);
 
-    const user = new User(email, password);
+    const passwordHash = bcrypt.hashSync(password, 4);
+    console.log(`Password after hash: ${passwordHash}`);
+
+    const user = new User(email, passwordHash);
     user.generateLog();
 
     UserModel.create({
@@ -21,7 +26,7 @@ exports.addUser = (req, res, next) => {
         message: 'User has been created',
         user: {
             email: email,
-            password: password
+            password: passwordHash
         }
     });
 };
