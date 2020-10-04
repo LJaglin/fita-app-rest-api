@@ -1,18 +1,21 @@
-const User = require('../models/user');
+const UserModel = require('../models/user');
+const User = require('../classes/user');
 
 exports.addUser = (req, res, next) => {
-    console.log('addUser');
+    console.log('controller: addUser');
     const email = req.body.email;
     const password = req.body.password;
-    console.log(`email: ${email}, password : ${password}`);
+    console.log(`Data from request email: ${email}, password : ${password}`);
 
-    // const newUser = new UserClass(firstName, lastName, Date.now(), Date.now());
-    // newUser.generateLog();
+    const user = new User(email, password);
+    user.generateLog();
 
-    // //UserModel.create(newUser).then(result => console.log(result)).catch(err => console.log(err));
-    // UserModel.create(newUser)
-    //         .then(result => console.log(result))
-    //         .catch(err => console.log(err));
+    UserModel.create({
+            email: user._email,
+            password: user._password
+        })
+            .then(result => console.log(result))
+            .catch(err => console.log(err));
 
     res.status(201).json({
         message: 'User has been created',

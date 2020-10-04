@@ -1,5 +1,5 @@
 const UserModel = require('../models/userModel');
-const UserClass = require('../classes/userClass');
+const UserClass = require('../classes/user');
 
 exports.getUsers = (req, res, next) => {
     console.log('getUsers');
