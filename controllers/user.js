@@ -12,6 +12,9 @@ exports.addUser = (req, res, next) => {
     const passwordHash = bcrypt.hashSync(password, 4);
     console.log(`Password after hash: ${passwordHash}`);
 
+    const verified = bcrypt.compareSync(password, passwordHash);
+    console.log(`Is verified: ${verified}`);
+
     const user = new User(email, passwordHash);
     user.generateLog();
 
